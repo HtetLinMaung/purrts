@@ -1,6 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config();
-
 import express, { Application, NextFunction, Request, Response } from "express";
 import cluster from "cluster";
 import { cpus } from "os";

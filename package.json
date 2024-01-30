@@ -1,6 +1,6 @@
 {
   "name": "purrts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A lightweight framework to simplify the setup and scalability of Express applications with features like automatic route registration, centralized error handling, and cluster support.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -26,7 +26,6 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^16.4.1",
     "express": "^4.18.2",
     "starless-logger": "^1.0.5"
   },
