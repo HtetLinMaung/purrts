@@ -24,6 +24,7 @@ async function bootstrap(
 
   app.use(cors(corsOptions));
   app.use(express.json(bodyParserOptions));
+  app.use(express.urlencoded({ extended: true }));
 
   await registerRoutes(app, port, routesFolderPath);
 
