@@ -28,7 +28,7 @@ jspm_packages/
 lib/
 
 # TSC compiled TypeScript definition files
-*.d.ts
+# *.d.ts
 
 # TypeScript cache
 *.tsbuildinfo
