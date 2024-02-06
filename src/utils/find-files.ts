@@ -10,7 +10,10 @@ export default async function findFiles(dir: string): Promise<string[]> {
 
     if (entry.isDirectory()) {
       files = files.concat(await findFiles(entryPath));
-    } else if (entry.isFile() && entry.name.endsWith(".js")) {
+    } else if (
+      entry.isFile() &&
+      (entry.name.endsWith(".js") || entry.name.endsWith(".ts"))
+    ) {
       files.push(entryPath);
     }
   }
