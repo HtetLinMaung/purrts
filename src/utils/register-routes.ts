@@ -14,7 +14,7 @@ export default async function registerRoutes(
     const routes = await findFiles(routesFolderPath);
     routes.sort((a, b) => a.localeCompare(b));
     for (const route of routes) {
-      if (route.endsWith(".js")) {
+      if (route.endsWith(".js") || route.endsWith(".ts")) {
         const parseResult = parseRoutePath(route, routesFolderPath);
         const module = await import(parseResult.filepath);
         // console.log(module);
