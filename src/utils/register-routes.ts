@@ -1,9 +1,24 @@
-import { Application } from "express";
+import { Application, Handler } from "express";
 import { IRouteMetadata } from "../types";
 import findFiles from "./find-files";
 import parseRoutePath from "./parse-route-path";
 import { log } from "starless-logger";
 import fs from "fs";
+import { isAsyncFunction } from "util/types";
+
+export const handlerWrapper = (handler: Handler) => {
+  return (async (req, res, next) => {
+    try {
+      if (isAsyncFunction(handler)) {
+        await handler(req, res, next);
+      } else {
+        handler(req, res, next);
+      }
+    } catch (err) {
+      next(err);
+    }
+  }) as Handler;
+};
 
 export default async function registerRoutes(
   app: Application,
@@ -32,10 +47,10 @@ export default async function registerRoutes(
             method = metadata.method || "use";
             (app as any)[method](
               dynamicUrl,
-              ...[...middlewares, module.handler]
+              ...[...middlewares, handlerWrapper(module.handler)]
             );
           } else {
-            app.use(dynamicUrl, module.handler);
+            app.use(dynamicUrl, handlerWrapper(module.handler));
           }
         }
 
